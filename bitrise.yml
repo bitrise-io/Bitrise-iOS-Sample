@@ -13,7 +13,6 @@ workflows:
     - activate-ssh-key@4:
         run_if: '{{getenv "SSH_RSA_PRIVATE_KEY" | ne ""}}'
     - git-clone@4: {}
-    - cache-pull@2: {}
     - certificate-and-profile-installer@1: {}
     - recreate-user-schemes@1:
         inputs:
@@ -29,13 +28,11 @@ workflows:
         - team_id: "$BITRISE_TEAM"
         - export_method: "$BITRISE_EXPORT_METHOD"
     - deploy-to-bitrise-io@1: {}
-    - cache-push@2: {}
   primary:
     steps:
     - activate-ssh-key@4:
         run_if: '{{getenv "SSH_RSA_PRIVATE_KEY" | ne ""}}'
     - git-clone@4: {}
-    - cache-pull@2: {}
     - certificate-and-profile-installer@1: {}
     - recreate-user-schemes@1:
         inputs:
@@ -45,7 +42,6 @@ workflows:
         - project_path: "$BITRISE_PROJECT_PATH"
         - scheme: "$BITRISE_SCHEME"
     - deploy-to-bitrise-io@1: {}
-    - cache-push@2: {}
 app:
   envs:
   - opts:
