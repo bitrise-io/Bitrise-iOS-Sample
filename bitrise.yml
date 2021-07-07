@@ -20,6 +20,17 @@ workflows:
         - xcodebuild_options: -derivedDataPath "/Users/vagrant/Library/Developer/Xcode/DerivedData"
             -resultBundlePath "/Users/vagrant/Library/Developer/Xcode/ResultBundle"
             OTHER_SWIFT_FLAGS="-Xfrontend -debug-time-function-bodies"
+    - script@1:
+        inputs:
+        - content: |-
+            #!/usr/bin/env bash
+            # fail if any commands fails
+            set -e
+            # debug log
+            set -x
+
+            xclogparser dump --file /Users/vagrant/Library/Developer/Xcode/DerivedData/Logs/Build/*.xcactivitylog --output activity.json
+            cat activity.json
     - deploy-to-bitrise-io@1: {}
     - cache-push@2: {}
   deploy:
