@@ -8,4 +8,4 @@ Create a new project in Bitrise using this repo as you normally would. Use the `
 
 In order to sign the app during the `deploy` workflow archive step, you must set a valid provisioning profile and signing certificate in the `bitrise.yml` (`BITRISE_PROFILE_ID` and `BITRISE_CODE_SIGNING_IDENTITY` env vars) and upload those to your account. More details can be found in the [internal wiki](https://bitrise.atlassian.net/wiki/spaces/~833061986/pages/1554875463/Demo+App-Bitrise+Deploy+Workflow).
 
-test
+Test
