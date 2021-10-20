@@ -66,3 +66,6 @@ app:
   - opts:
       is_expand: false
     BITRISE_TEAM: 72SA8V3WYL
+meta:
+  bitrise.io:
+    machine_type_id: g2.8core
