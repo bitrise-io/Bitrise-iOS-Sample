@@ -65,4 +65,4 @@ app:
 meta:
   bitrise.io:
     machine_type_id: g2.8core
-    stack: osx-xcode-13.4.x
+    stack: osx-xcode-13.2.x
