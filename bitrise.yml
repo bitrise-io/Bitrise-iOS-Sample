@@ -42,6 +42,10 @@ workflows:
         - scheme: "$BITRISE_SCHEME"
     - deploy-to-bitrise-io@1: {}
     - cache-push@2: {}
+    meta:
+      bitrise.io:
+        machine_type_id: g2.8core
+        stack: osx-xcode-13.1.x
 app:
   envs:
   - opts:
