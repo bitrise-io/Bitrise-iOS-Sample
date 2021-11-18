@@ -64,5 +64,5 @@ app:
     BITRISE_TEAM: 72SA8V3WYL
 meta:
   bitrise.io:
-    machine_type_id: g2.8core
+    machine_type_id: g3.8core
     stack: osx-xcode-13.2.x
