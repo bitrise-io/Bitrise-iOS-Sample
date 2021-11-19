@@ -51,9 +51,9 @@ app:
   - opts:
       is_expand: false
     BITRISE_EXPORT_METHOD: development
-  - opts:
+- opts:
       is_expand: false
-    BITRISE_PROFILE_ID: b103a1f0-1f51-4d53-a41f-c08719676e94
+    BITRISE_PROFILE_ID: e682b378-3286-41b8-aeeb-4b4398c0e025
   - opts:
       is_expand: false
     BITRISE_CODE_SIGNING_IDENTITY: 'iPhone Developer: Dev Portal Bot Bitrise (E89JV3W9K4)'
