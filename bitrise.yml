@@ -51,7 +51,7 @@ app:
   - opts:
       is_expand: false
     BITRISE_EXPORT_METHOD: development
-- opts:
+  - opts:
       is_expand: false
     BITRISE_PROFILE_ID: e682b378-3286-41b8-aeeb-4b4398c0e025
   - opts:
