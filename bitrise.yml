@@ -1,13 +1,35 @@
----
-format_version: '8'
+format_version: "8"
 default_step_lib_source: https://github.com/bitrise-io/bitrise-steplib.git
 project_type: ios
+app:
+  envs:
+  - BITRISE_PROJECT_PATH: BitriseTest.xcodeproj
+    opts:
+      is_expand: false
+  - BITRISE_SCHEME: BasicScheme
+    opts:
+      is_expand: false
+  - BITRISE_EXPORT_METHOD: development
+    opts:
+      is_expand: false
+  - BITRISE_PROFILE_ID: b103a1f0-1f51-4d53-a41f-c08719676e94
+    opts:
+      is_expand: false
+  - BITRISE_CODE_SIGNING_IDENTITY: 'Apple Development: Ben Boral (L5Y7PBM38G)'
+    opts:
+      is_expand: false
+  - BITRISE_TEAM: 72SA8V3WYL
+    opts:
+      is_expand: false
+meta:
+  bitrise.io:
+    stack: osx-xcode-13.1.x
 trigger_map:
-- push_branch: "master"
+- push_branch: master
   workflow: deploy
-- push_branch: "*"
+- push_branch: '*'
   workflow: primary
-- pull_request_source_branch: "*"
+- pull_request_source_branch: '*'
   workflow: primary
 workflows:
   deploy:
@@ -19,58 +41,35 @@ workflows:
     - certificate-and-profile-installer@1: {}
     - xcode-archive@3:
         inputs:
-        - project_path: "$BITRISE_PROJECT_PATH"
-        - scheme: "$BITRISE_SCHEME"
-        - force_code_sign_identity: "$BITRISE_CODE_SIGNING_IDENTITY"
-        - force_provisioning_profile: "$BITRISE_PROFILE_ID"
-        - compile_bitcode: 'no'
-        - upload_bitcode: 'no'
-        - team_id: "$BITRISE_TEAM"
-        - export_method: "$BITRISE_EXPORT_METHOD"
+        - project_path: $BITRISE_PROJECT_PATH
+        - scheme: $BITRISE_SCHEME
+        - force_code_sign_identity: $BITRISE_CODE_SIGNING_IDENTITY
+        - force_provisioning_profile: $BITRISE_PROFILE_ID
+        - compile_bitcode: "no"
+        - upload_bitcode: "no"
+        - team_id: $BITRISE_TEAM
+        - export_method: $BITRISE_EXPORT_METHOD
     - deploy-to-bitrise-io@1: {}
     - cache-push@2: {}
     meta:
       bitrise.io:
-        machine_type_id: g2.8core
         stack: osx-xcode-13.1.x
   primary:
     steps:
     - activate-ssh-key@4:
         run_if: '{{getenv "SSH_RSA_PRIVATE_KEY" | ne ""}}'
-    - git-clone@4: {}
+    - git-clone@6.1:
+        inputs:
+        - clone_depth: "100"
     - cache-pull@2: {}
     - certificate-and-profile-installer@1: {}
     - xcode-test@2:
         inputs:
-        - project_path: "$BITRISE_PROJECT_PATH"
-        - scheme: "$BITRISE_SCHEME"
+        - project_path: $BITRISE_PROJECT_PATH
+        - xcodebuild_test_options: -parallel-testing-enabled YES -parallel-testing-worker-count 3
+        - scheme: $BITRISE_SCHEME
     - deploy-to-bitrise-io@1: {}
     - cache-push@2: {}
     meta:
       bitrise.io:
-        machine_type_id: g2.8core
         stack: osx-xcode-13.2.x
-app:
-  envs:
-  - opts:
-      is_expand: false
-    BITRISE_PROJECT_PATH: BitriseTest.xcodeproj
-  - opts:
-      is_expand: false
-    BITRISE_SCHEME: BasicScheme
-  - opts:
-      is_expand: false
-    BITRISE_EXPORT_METHOD: development
-  - opts:
-      is_expand: false
-    BITRISE_PROFILE_ID: b103a1f0-1f51-4d53-a41f-c08719676e94
-  - opts:
-      is_expand: false
-    BITRISE_CODE_SIGNING_IDENTITY: 'Apple Development: Ben Boral (L5Y7PBM38G)'
-  - opts:
-      is_expand: false
-    BITRISE_TEAM: 72SA8V3WYL
-meta:
-  bitrise.io:
-    machine_type_id: g2.8core
-    stack: osx-xcode-13.1.x
