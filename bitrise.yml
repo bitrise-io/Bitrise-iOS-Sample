@@ -21,12 +21,16 @@ workflows:
         - project_path: "$BITRISE_PROJECT_PATH"
         - scheme: "$BITRISE_SCHEME"
         - test_repetition_mode: retry_on_failure
-    - xcode-archive@4:
+    - xcode-archive@4.5:
         inputs:
-        - project_path: "$BITRISE_PROJECT_PATH"
-        - scheme: "$BITRISE_SCHEME"
-        - distribution_method: "$BITRISE_DISTRIBUTION_METHOD"
-        - automatic_code_signing: api-key
+        - project_path: $BITRISE_PROJECT_PATH
+        - scheme: $BITRISE_SCHEME
+        - force_code_sign_identity: $BITRISE_CODE_SIGNING_IDENTITY
+        - force_provisioning_profile: $BITRISE_PROFILE_ID
+        - compile_bitcode: 'no'
+        - upload_bitcode: 'no'
+        - team_id: $BITRISE_TEAM
+        - export_method: $BITRISE_EXPORT_METHOD
     - cache-push@2: {}
     - deploy-to-bitrise-io@2: {}
   primary:
