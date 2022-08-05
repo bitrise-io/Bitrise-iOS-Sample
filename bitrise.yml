@@ -16,6 +16,7 @@ workflows:
     - activate-ssh-key@4: {}
     - git-clone@6: {}
     - cache-pull@2: {}
+    - certificate-and-profile-installer@1: {}
     - xcode-test@4:
         inputs:
         - project_path: "$BITRISE_PROJECT_PATH"
@@ -72,4 +73,4 @@ app:
     BITRISE_CODE_SIGNING_IDENTITY: 'Apple Development: Ben Boral (L5Y7PBM38G)'
   - opts:
       is_expand: false
-    BITRISE_TEAM: 72SA8V3WYLs
+    BITRISE_TEAM: 72SA8V3WYL
