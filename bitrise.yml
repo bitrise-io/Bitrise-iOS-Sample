@@ -1,55 +1,59 @@
 ---
-format_version: '8'
+format_version: '11'
 default_step_lib_source: https://github.com/bitrise-io/bitrise-steplib.git
 project_type: ios
-trigger_map:
-- push_branch: "master"
-  workflow: deploy
-- push_branch: "*"
-  workflow: primary
-- pull_request_source_branch: "*"
-  workflow: primary
 workflows:
   deploy:
+    description: |
+      The workflow tests, builds and deploys the app using *Deploy to bitrise.io* step.
+
+      For testing the *retry_on_failure* test repetition mode is enabled.
+
+      Next steps:
+      - Set up [Connecting to an Apple service with API key](https://devcenter.bitrise.io/en/accounts/connecting-to-services/connecting-to-an-apple-service-with-api-key.html##).
+      - Or further customise code signing following our [iOS code signing](https://devcenter.bitrise.io/en/code-signing/ios-code-signing.html) guide.
     steps:
-    - activate-ssh-key@4:
-        run_if: '{{getenv "SSH_RSA_PRIVATE_KEY" | ne ""}}'
-    - git-clone@4: {}
+    - activate-ssh-key@4: {}
+    - git-clone@6: {}
     - cache-pull@2: {}
     - certificate-and-profile-installer@1: {}
-    - xcode-archive@3:
+    - xcode-test@4:
         inputs:
         - project_path: "$BITRISE_PROJECT_PATH"
         - scheme: "$BITRISE_SCHEME"
-        - force_code_sign_identity: "$BITRISE_CODE_SIGNING_IDENTITY"
-        - force_provisioning_profile: "$BITRISE_PROFILE_ID"
+        - test_repetition_mode: retry_on_failure
+    - xcode-archive@4.5:
+        inputs:
+        - project_path: $BITRISE_PROJECT_PATH
+        - scheme: $BITRISE_SCHEME
+        - force_code_sign_identity: $BITRISE_CODE_SIGNING_IDENTITY
+        - force_provisioning_profile: $BITRISE_PROFILE_ID
         - compile_bitcode: 'no'
         - upload_bitcode: 'no'
-        - team_id: "$BITRISE_TEAM"
-        - export_method: "$BITRISE_EXPORT_METHOD"
-    - deploy-to-bitrise-io@1: {}
+        - team_id: $BITRISE_TEAM
+        - export_method: $BITRISE_EXPORT_METHOD
     - cache-push@2: {}
-    meta:
-      bitrise.io:
-        machine_type_id: g2.8core
-        stack: osx-xcode-13.1.x
+    - deploy-to-bitrise-io@2: {}
   primary:
+    description: |
+      The workflow executes the tests. The *retry_on_failure* test repetition mode is enabled.
+
+      Next steps:
+      - Check out [Getting started with iOS apps](https://devcenter.bitrise.io/en/getting-started/getting-started-with-ios-apps.html).
     steps:
-    - activate-ssh-key@4:
-        run_if: '{{getenv "SSH_RSA_PRIVATE_KEY" | ne ""}}'
-    - git-clone@4: {}
+    - activate-ssh-key@4: {}
+    - git-clone@6: {}
     - cache-pull@2: {}
-    - certificate-and-profile-installer@1: {}
-    - xcode-test@2:
+    - xcode-test@4:
         inputs:
         - project_path: "$BITRISE_PROJECT_PATH"
         - scheme: "$BITRISE_SCHEME"
-    - deploy-to-bitrise-io@1: {}
+        - test_repetition_mode: retry_on_failure
     - cache-push@2: {}
-    meta:
-      bitrise.io:
-        machine_type_id: g2.8core
-        stack: osx-xcode-13.2.x
+    - deploy-to-bitrise-io@2: {}
+meta:
+  bitrise.io:
+    stack: osx-xcode-13.2.x
 app:
   envs:
   - opts:
@@ -60,7 +64,7 @@ app:
     BITRISE_SCHEME: BasicScheme
   - opts:
       is_expand: false
-    BITRISE_EXPORT_METHOD: development
+    BITRISE_DISTRIBUTION_METHOD: development
   - opts:
       is_expand: false
     BITRISE_PROFILE_ID: b103a1f0-1f51-4d53-a41f-c08719676e94
@@ -70,7 +74,3 @@ app:
   - opts:
       is_expand: false
     BITRISE_TEAM: 72SA8V3WYL
-meta:
-  bitrise.io:
-    machine_type_id: g2.8core
-    stack: osx-xcode-13.1.x
