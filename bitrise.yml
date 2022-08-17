@@ -38,7 +38,7 @@ workflows:
         inputs:
         - repository_url: "https://github.com/bitrise-io/Bitrise-iOS-Sample"
         - clone_destination: "./_tmp"
-        - checkout_branch: "master"
+        - checkout_branch: "mm/cleanup"
         - clone_depth: "1"
     - cache-pull@2: {}
     - certificate-and-profile-installer@1: {}
