@@ -34,7 +34,7 @@ workflows:
     steps:
     - activate-ssh-key@4:
         run_if: '{{getenv "SSH_RSA_PRIVATE_KEY" | ne ""}}'
-    - git::https://github.com/matrangam/bitrise-step-swift-clone.git@0.0.2:
+    - git::https://github.com/matrangam/bitrise-step-swift-clone.git@main:
         inputs:
         - repository_url: "https://github.com/bitrise-io/Bitrise-iOS-Sample"
         - clone_destination: "./_tmp"
