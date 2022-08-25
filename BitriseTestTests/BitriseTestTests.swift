@@ -29,5 +29,9 @@ class BitriseTestTests: XCTestCase {
             // Put the code you want to measure the time of here.
         }
     }
+    
+    func testExampleFailing() throws {
+        XCTAssertEqual(2, 3)
+    }
 
 }
