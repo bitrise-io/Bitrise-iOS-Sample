@@ -51,10 +51,6 @@ workflows:
         - test_repetition_mode: retry_on_failure
     - cache-push@2: {}
     - deploy-to-bitrise-io@2: {}
-meta:
-  bitrise.io:
-    stack: osx-xcode-13.2.x
-    machine_type_id: g2.4core
 trigger_map:
 - push_branch: '*'
   workflow: primary
