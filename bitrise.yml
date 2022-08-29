@@ -74,8 +74,3 @@ app:
   - opts:
       is_expand: false
     BITRISE_TEAM: 72SA8V3WYL
-trigger_map:
-- push_branch: '*'
-  workflow: primary
-- pull_request_source_branch: '*'
-  workflow: primary
