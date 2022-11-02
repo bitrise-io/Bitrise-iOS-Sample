@@ -1,5 +1,5 @@
 ---
-format_version: '8'
+format_version: '11'
 default_step_lib_source: https://github.com/bitrise-io/bitrise-steplib.git
 project_type: ios
 trigger_map:
@@ -12,36 +12,38 @@ workflows:
     steps:
     - activate-ssh-key@4:
         run_if: '{{getenv "SSH_RSA_PRIVATE_KEY" | ne ""}}'
-    - git-clone@4: {}
+    - git-clone@6: {}
     - cache-pull@2: {}
     - certificate-and-profile-installer@1: {}
     - recreate-user-schemes@1:
         inputs:
         - project_path: "$BITRISE_PROJECT_PATH"
-    - xcode-archive@3:
+    - xcode-archive@4:
         inputs:
         - project_path: "$BITRISE_PROJECT_PATH"
         - scheme: "$BITRISE_SCHEME"
-        - force_code_sign_identity: "$BITRISE_CODE_SIGNING_IDENTITY"
-        - force_provisioning_profile: "$BITRISE_PROFILE_ID"
         - compile_bitcode: 'no'
         - upload_bitcode: 'no'
-        - team_id: "$BITRISE_TEAM"
-        - export_method: "$BITRISE_EXPORT_METHOD"
-    - deploy-to-bitrise-io@1: {}
+        - automatic_code_signing: 'off'
+        - distribution_method: "$BITRISE_DISTRIBUTION_METHOD"
+        - xcconfig_content: |
+            DEVELOPMENT_TEAM = $BITRISE_TEAM
+            CODE_SIGN_IDENTITY = $BITRISE_CODE_SIGNING_IDENTITY
+            PROVISIONING_PROFILE_SPECIFIER = $BITRISE_PROFILE_ID
+    - deploy-to-bitrise-io@2: {}
     - cache-push@2: {}
   primary:
     steps:
     - activate-ssh-key@4:
         run_if: '{{getenv "SSH_RSA_PRIVATE_KEY" | ne ""}}'
-    - git-clone@4: {}
+    - git-clone@6: {}
     - cache-pull@2: {}
     - certificate-and-profile-installer@1: {}
-    - xcode-test@2:
+    - xcode-test@4:
         inputs:
         - project_path: "$BITRISE_PROJECT_PATH"
         - scheme: "$BITRISE_SCHEME"
-    - deploy-to-bitrise-io@1: {}
+    - deploy-to-bitrise-io@2: {}
     - cache-push@2: {}
 app:
   envs:
@@ -53,13 +55,17 @@ app:
     BITRISE_SCHEME: BitriseTest
   - opts:
       is_expand: false
-    BITRISE_EXPORT_METHOD: development
-  - opts:
-      is_expand: false
-    BITRISE_PROFILE_ID: e682b378-3286-41b8-aeeb-4b4398c0e025
-  - opts:
-      is_expand: false
-    BITRISE_CODE_SIGNING_IDENTITY: 'iPhone Developer: Dev Portal Bot Bitrise (E89JV3W9K4)'
+    BITRISE_DISTRIBUTION_METHOD: development
   - opts:
       is_expand: false
     BITRISE_TEAM: 72SA8V3WYL
+  - opts:
+      is_expand: false
+    BITRISE_PROFILE_ID: 60cff004-0cf3-401a-9658-229c92516f26
+  - opts:
+      is_expand: false
+    BITRISE_CODE_SIGNING_IDENTITY: Apple Development
+meta:
+  bitrise.io:
+    stack: osx-xcode-13.4.x
+    machine_type_id: g2.4core
