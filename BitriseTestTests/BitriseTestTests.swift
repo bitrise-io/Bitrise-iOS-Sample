@@ -21,6 +21,17 @@ class BitriseTestTests: XCTestCase {
     func testExample() throws {
         // This is an example of a functional test case.
         // Use XCTAssert and related functions to verify your tests produce the correct results.
+        XCTAssert(true)
+    }
+    
+    func testUniversalEntropy() throws {
+        let input1: Int = 2
+        let input2: Int = 2
+        let expectedResult: Int = 5
+        
+        let actualResult: Int = input1 + input2
+        
+        XCTAssert(actualResult == expectedResult)
     }
 
     func testPerformanceExample() throws {
