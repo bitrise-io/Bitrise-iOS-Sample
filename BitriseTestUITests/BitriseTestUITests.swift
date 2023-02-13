@@ -6,6 +6,10 @@
 //
 
 import XCTest
+import SnapshotTesting
+import SwiftUI
+
+@testable import BitriseTest
 
 class BitriseTestUITests: XCTestCase {
 
@@ -38,5 +42,10 @@ class BitriseTestUITests: XCTestCase {
                 XCUIApplication().launch()
             }
         }
+    }
+    
+    func testDefaultAppeance() {
+        let contentView = ContentView()
+        assertSnapshot(matching: contentView.toVC(), as: .image)
     }
 }

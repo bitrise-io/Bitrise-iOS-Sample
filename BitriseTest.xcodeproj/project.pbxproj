@@ -3,12 +3,15 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1D576677299AF4B100346736 /* SnapshotTesting in Frameworks */ = {isa = PBXBuildFile; productRef = 1D576676299AF4B100346736 /* SnapshotTesting */; };
+		1D57667B299AF6EF00346736 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1F9B10825C380F200E21DE4 /* ContentView.swift */; };
+		1D57667C299AF6F700346736 /* View+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D576678299AF5F000346736 /* View+Extensions.swift */; };
+		1DFB51DB299AF8A60085E41D /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1F9B10825C380F200E21DE4 /* ContentView.swift */; };
 		A1F9B10725C380F200E21DE4 /* BitriseTestApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1F9B10625C380F200E21DE4 /* BitriseTestApp.swift */; };
-		A1F9B10925C380F200E21DE4 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1F9B10825C380F200E21DE4 /* ContentView.swift */; };
 		A1F9B10B25C380F400E21DE4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A1F9B10A25C380F400E21DE4 /* Assets.xcassets */; };
 		A1F9B10E25C380F400E21DE4 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A1F9B10D25C380F400E21DE4 /* Preview Assets.xcassets */; };
 		A1F9B11925C380F500E21DE4 /* BitriseTestTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1F9B11825C380F500E21DE4 /* BitriseTestTests.swift */; };
@@ -33,6 +36,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		1D576678299AF5F000346736 /* View+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+Extensions.swift"; sourceTree = "<group>"; };
 		A1F9B10325C380F200E21DE4 /* BitriseTest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BitriseTest.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A1F9B10625C380F200E21DE4 /* BitriseTestApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BitriseTestApp.swift; sourceTree = "<group>"; };
 		A1F9B10825C380F200E21DE4 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -66,6 +70,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1D576677299AF4B100346736 /* SnapshotTesting in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -125,6 +130,7 @@
 			isa = PBXGroup;
 			children = (
 				A1F9B12325C380F500E21DE4 /* BitriseTestUITests.swift */,
+				1D576678299AF5F000346736 /* View+Extensions.swift */,
 				A1F9B12525C380F500E21DE4 /* Info.plist */,
 			);
 			path = BitriseTestUITests;
@@ -182,6 +188,9 @@
 				A1F9B12125C380F500E21DE4 /* PBXTargetDependency */,
 			);
 			name = BitriseTestUITests;
+			packageProductDependencies = (
+				1D576676299AF4B100346736 /* SnapshotTesting */,
+			);
 			productName = BitriseTestUITests;
 			productReference = A1F9B11F25C380F500E21DE4 /* BitriseTestUITests.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
@@ -217,6 +226,9 @@
 				Base,
 			);
 			mainGroup = A1F9B0FA25C380F200E21DE4;
+			packageReferences = (
+				1D576675299AF4B100346736 /* XCRemoteSwiftPackageReference "swift-snapshot-testing" */,
+			);
 			productRefGroup = A1F9B10425C380F200E21DE4 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -259,8 +271,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A1F9B10925C380F200E21DE4 /* ContentView.swift in Sources */,
 				A1F9B10725C380F200E21DE4 /* BitriseTestApp.swift in Sources */,
+				1D57667B299AF6EF00346736 /* ContentView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -276,7 +288,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1D57667C299AF6F700346736 /* View+Extensions.swift in Sources */,
 				A1F9B12425C380F500E21DE4 /* BitriseTestUITests.swift in Sources */,
+				1DFB51DB299AF8A60085E41D /* ContentView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -600,6 +614,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		1D576675299AF4B100346736 /* XCRemoteSwiftPackageReference "swift-snapshot-testing" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/pointfreeco/swift-snapshot-testing";
+			requirement = {
+				kind = exactVersion;
+				version = 1.11.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		1D576676299AF4B100346736 /* SnapshotTesting */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 1D576675299AF4B100346736 /* XCRemoteSwiftPackageReference "swift-snapshot-testing" */;
+			productName = SnapshotTesting;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = A1F9B0FB25C380F200E21DE4 /* Project object */;
 }
