@@ -46,7 +46,7 @@ class BitriseTestUITests: XCTestCase {
     }
     
     func testDefaultAppearance() {
-        var environmentFactor: Int = 3
+        var environmentFactor: Int = 2
         if  let envVar = getenv(entropyEnvVarKey),
             let eFactor: String = String(utf8String: envVar) {
             environmentFactor = Int(eFactor) ?? environmentFactor
