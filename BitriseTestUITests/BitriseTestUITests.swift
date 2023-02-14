@@ -44,7 +44,7 @@ class BitriseTestUITests: XCTestCase {
         }
     }
     
-    func testDefaultAppeance() {
+    func testDefaultAppearance() {
         let contentView = ContentView()
         assertSnapshot(matching: contentView.toVC(), as: .image)
     }
