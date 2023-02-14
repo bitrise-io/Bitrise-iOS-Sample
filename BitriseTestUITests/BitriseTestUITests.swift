@@ -50,7 +50,7 @@ class BitriseTestUITests: XCTestCase {
         if  let envVar = getenv(entropyEnvVarKey),
             let eFactor: String = String(utf8String: envVar) {
             environmentFactor = Int(eFactor) ?? environmentFactor
-            setenv(entropyEnvVarKey, "\(environmentFactor - 1)", 1)
+            setenv(entropyEnvVarKey, "\(environmentFactor + 1)", 1)
         }
         let contentView = ContentView(runNumber: environmentFactor)
         assertSnapshot(matching: contentView.toVC(), as: .image)
