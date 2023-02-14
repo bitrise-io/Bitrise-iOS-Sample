@@ -11,7 +11,7 @@ import SwiftUI
 struct BitriseTestApp: App {
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            ContentView(runNumber: 1)
         }
     }
 }

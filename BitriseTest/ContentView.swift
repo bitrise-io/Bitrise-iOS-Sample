@@ -8,14 +8,15 @@
 import SwiftUI
 
 struct ContentView: View {
+    let runNumber: Int
     var body: some View {
-        Text("Hello, world!")
+        Text(runNumber == 3 ? "Hello, world!" : "Hello, Bitrise!")
             .padding()
     }
 }
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        ContentView()
+        ContentView(runNumber: 1)
     }
 }

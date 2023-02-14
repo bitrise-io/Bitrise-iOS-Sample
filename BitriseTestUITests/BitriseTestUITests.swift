@@ -12,6 +12,7 @@ import SwiftUI
 @testable import BitriseTest
 
 class BitriseTestUITests: XCTestCase {
+    private var entropyEnvVarKey: String = "UI_ENTROPY_COUNT"
 
     override func setUpWithError() throws {
         // Put setup code here. This method is called before the invocation of each test method in the class.
@@ -45,7 +46,13 @@ class BitriseTestUITests: XCTestCase {
     }
     
     func testDefaultAppearance() {
-        let contentView = ContentView()
+        var environmentFactor: Int = 3
+        if  let envVar = getenv(entropyEnvVarKey),
+            let eFactor: String = String(utf8String: envVar) {
+            environmentFactor = Int(eFactor) ?? environmentFactor
+            setenv(entropyEnvVarKey, "\(environmentFactor - 1)", 1)
+        }
+        let contentView = ContentView(runNumber: environmentFactor)
         assertSnapshot(matching: contentView.toVC(), as: .image)
     }
 }
