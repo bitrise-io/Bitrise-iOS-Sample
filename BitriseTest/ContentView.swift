@@ -10,7 +10,7 @@ import SwiftUI
 struct ContentView: View {
     let runNumber: Int
     var body: some View {
-        Text(runNumber == 3 ? "Hello, world!" : "Hello, Bitrise!")
+        Text(runNumber == 2 ? "Hello, world!" : "Hello, Bitrise!")
             .padding()
     }
 }
