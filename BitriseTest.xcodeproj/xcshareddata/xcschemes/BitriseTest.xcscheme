@@ -70,6 +70,13 @@
             ReferencedContainer = "container:BitriseTest.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
+      <EnvironmentVariables>
+         <EnvironmentVariable
+            key = "ENTROPY_COUNT"
+            value = "$ENTROPY_COUNT"
+            isEnabled = "YES">
+         </EnvironmentVariable>
+      </EnvironmentVariables>
    </LaunchAction>
    <ProfileAction
       buildConfiguration = "Release"
