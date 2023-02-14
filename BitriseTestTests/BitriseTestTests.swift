@@ -9,6 +9,7 @@ import XCTest
 @testable import BitriseTest
 
 class BitriseTestTests: XCTestCase {
+    private var entropyEnvVarKey: String = "ENTROPY_COUNT"
 
     override func setUpWithError() throws {
         // Put setup code here. This method is called before the invocation of each test method in the class.
@@ -27,9 +28,15 @@ class BitriseTestTests: XCTestCase {
     func testUniversalEntropy() throws {
         let input1: Int = 2
         let input2: Int = 2
-        let expectedResult: Int = 5
-        
-        let actualResult: Int = input1 + input2
+        var environmentFactor: Int = 0
+        if  let envVar = getenv(entropyEnvVarKey),
+            let eFactor: String = String(utf8String: envVar) {
+            environmentFactor = Int(eFactor) ?? environmentFactor
+            setenv(entropyEnvVarKey, "\(environmentFactor - 1)", 1)
+        }
+        let expectedResult: Int = 4
+    
+        let actualResult: Int = input1 + input2 + environmentFactor
         
         XCTAssert(actualResult == expectedResult)
     }
