@@ -28,7 +28,7 @@ class BitriseTestTests: XCTestCase {
     func testUniversalEntropy() throws {
         let input1: Int = 2
         let input2: Int = 2
-        var environmentFactor: Int = 0
+        var environmentFactor: Int = 2
         if  let envVar = getenv(entropyEnvVarKey),
             let eFactor: String = String(utf8String: envVar) {
             environmentFactor = Int(eFactor) ?? environmentFactor
@@ -36,7 +36,7 @@ class BitriseTestTests: XCTestCase {
         }
         let expectedResult: Int = 4
     
-        let actualResult: Int = input1 + input2 + environmentFactor
+        let actualResult: Int = input1 + input2 - environmentFactor
         
         XCTAssert(actualResult == expectedResult)
     }
